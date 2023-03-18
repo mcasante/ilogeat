@@ -1,0 +1,62 @@
+@import './markdown.css';
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+
+:root {
+  --black: #000;
+  --red: #EB2A48;
+  --blue: #71C7FF;
+  --green: #62AA2A;
+  --border-color: var(--black);
+  --shadow-color: var(--border-color);
+  --border-size: .2rem;
+  --shadow-size: .25rem;
+  --border: var(--border-size) solid var(--border-color);
+  --shadow: var(--shadow-size) var(--shadow-size) var(--shadow-color);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  font-family: 'Itim', 'DM Mono', monospace;
+}
+
+html.dark {
+  background: #121212;
+  color-scheme: dark;
+}
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: rgb(13,148,136);
+  opacity: 0.75;
+  position: fixed;
+  z-index: 1031;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+}
+
+.c-border {
+  border: var(--border);
+}
+
+.c-shadow {
+  box-shadow: var(--shadow);
+}
+
+.c-style {
+  @extend .c-border;
+  @extend .c-shadow;
+}
