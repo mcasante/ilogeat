@@ -3,9 +3,12 @@
 
 :root {
   --black: #000;
+  --white: #FFF;
   --red: #EB2A48;
   --blue: #71C7FF;
   --green: #62AA2A;
+  --light-green: #88DF45;
+  --pink: #FF4487;
   --border-color: var(--black);
   --shadow-color: var(--border-color);
   --border-size: .2rem;
@@ -25,13 +28,18 @@ html,
 body,
 #app {
   height: 100%;
-  font-family: 'Itim', 'DM Mono', monospace;
+  font-family: sans-serif, 'DM Mono', monospace;
+  overflow-x: hidden;
 }
 
-html.dark {
-  background: #121212;
-  color-scheme: dark;
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Itim', cursive;
 }
+
+// html.dark {
+//   background: #121212;
+//   color-scheme: dark;
+// }
 
 #nprogress {
   pointer-events: none;
