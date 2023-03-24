@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { Carousel, Slide } from 'vue3-carousel'
 import photo from '~/assets/sample-plate.jpeg'
-import 'vue3-carousel/dist/carousel.css'
 
 defineOptions({
   name: 'appIndex',
@@ -51,18 +49,6 @@ const handleAdd = () => {
     <h1 class="text-2xl font-bold mb-4">
       Daily Log
     </h1>
-    <!-- <div>
-      <Carousel :touch-drag="true" :items-to-show="1.05" :model-value="meals.length + 1" snap-align="center" class="py-8" @click="handleAdd">
-        <Slide v-for="meal in meals" :key="meal.name" @click="handleAdd">
-          <MButton v-if="meal.add" class="add-meal-button" @click="handleAdd">
-            +
-          </MButton>
-          <div v-else class="border rounded-2 overflow-hidden border-black">
-            <img :src="meal.photo" class="block rounded image-render-pixel">
-          </div>
-        </Slide>
-      </Carousel>
-    </div> -->
     <TestCarousel :items="meals">
       <template #default="{ item }">
         <MButton v-if="item.add" class="add-meal-button" @click="handleAdd">
@@ -73,21 +59,6 @@ const handleAdd = () => {
         </div>
       </template>
     </TestCarousel>
-    <!-- <div class="ml-4">
-            <h2 class="text-lg font-bold">
-              {{ meal.name }}
-            </h2>
-            <p class="text-sm">
-              {{ meal.time }}
-            </p>
-          </div>
-        </div>
-        <div class="flex flex-wrap">
-          <m-tag v-for="tag in meal.tags" :key="tag" class="mr-2 mb-2">
-            {{ tag }}
-          </m-tag>
-        </div> -->
-    <!-- </div> -->
   </section>
   <section>
     <m-button>Add Meal</m-button>
