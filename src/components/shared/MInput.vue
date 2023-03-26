@@ -12,10 +12,10 @@ const labelClasses = Object.values({
 }).join(' ')
 
 const inputClasses = Object.values({
-  defaults: 'c-style outline-none w-full border border-gray-300 rounded p-2',
+  defaults: 'shadow-lg shadow-black/10 outline-none w-full border border-gray-300 rounded p-2',
   hover: '',
   active: '',
-  focus: 'focus:border-red-500',
+  focus: '',
 }).join(' ')
 </script>
 

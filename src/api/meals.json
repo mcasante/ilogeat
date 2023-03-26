@@ -1,0 +1,115 @@
+[
+  {
+    "id": 1,
+    "timestamp": 1648692000000,
+    "photo": "https://via.placeholder.com/400",
+    "name": "Oatmeal",
+    "notes": "Add blueberries and walnuts",
+    "tags": [
+      "breakfast",
+      "healthy"
+    ]
+  },
+  {
+    "id": 2,
+    "timestamp": 1648710000000,
+    "photo": "https://via.placeholder.com/400",
+    "name": "Grilled Chicken Salad",
+    "notes": "Add avocado and balsamic vinaigrette",
+    "tags": [
+      "lunch",
+      "protein"
+    ]
+  },
+  {
+    "id": 3,
+    "timestamp": 1648742400000,
+    "photo": "https://via.placeholder.com/400",
+    "name": "Beef Stir Fry",
+    "notes": "Add broccoli and carrots",
+    "tags": [
+      "dinner",
+      "protein",
+      "vegetables"
+    ]
+  },
+  {
+    "id": 4,
+    "timestamp": 1648756800000,
+    "photo": "https://via.placeholder.com/400",
+    "name": "Yogurt Parfait",
+    "notes": "Add granola and honey",
+    "tags": [
+      "snack",
+      "healthy"
+    ]
+  },
+  {
+    "id": 5,
+    "timestamp": 1648789200000,
+    "photo": "https://via.placeholder.com/400",
+    "name": "Banana Bread",
+    "notes": "Add chocolate chips",
+    "tags": [
+      "breakfast",
+      "dessert"
+    ]
+  },
+  {
+    "id": 6,
+    "timestamp": 1648807200000,
+    "photo": "https://via.placeholder.com/400",
+    "name": "Turkey Sandwich",
+    "notes": "Add lettuce and tomato",
+    "tags": [
+      "lunch",
+      "protein"
+    ]
+  },
+  {
+    "id": 7,
+    "timestamp": 1648839600000,
+    "photo": "https://via.placeholder.com/400",
+    "name": "Salmon with Roasted Vegetables",
+    "notes": "Add asparagus and sweet potatoes",
+    "tags": [
+      "dinner",
+      "protein",
+      "vegetables"
+    ]
+  },
+  {
+    "id": 8,
+    "timestamp": 1648854000000,
+    "photo": "https://via.placeholder.com/400",
+    "name": "Hummus and Carrots",
+    "notes": "Add celery and crackers",
+    "tags": [
+      "snack",
+      "healthy"
+    ]
+  },
+  {
+    "id": 9,
+    "timestamp": 1648886400000,
+    "photo": "https://via.placeholder.com/400",
+    "name": "Blueberry Pancakes",
+    "notes": "Add syrup and butter",
+    "tags": [
+      "breakfast",
+      "dessert"
+    ]
+  },
+  {
+    "id": 10,
+    "timestamp": 1648904400000,
+    "photo": "https://via.placeholder.com/400",
+    "name": "Black Bean Burger with Sweet Potato Fries",
+    "notes": "Add ketchup and mayo",
+    "tags": [
+      "lunch",
+      "protein",
+      "vegetables"
+    ]
+  }
+]
