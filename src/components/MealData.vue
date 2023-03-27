@@ -80,10 +80,10 @@ const today = computed(() => new Date().toLocaleDateString('en-US', { weekday: '
 
     <Transition>
       <div v-if="meal">
-        <div class="tags">
+        <div class="flex flex-wrap gap-2 mt-2">
           <MTag
             v-for="tag in meal.tags"
-            :key="tag" removable class="mr-2"
+            :key="tag" removable
             @remove="() => meal && handleRemove(meal.id, tag)"
           >
             {{ tag }}
@@ -94,8 +94,8 @@ const today = computed(() => new Date().toLocaleDateString('en-US', { weekday: '
         </div>
 
         <div
-          :class="{ 'border-solid brutal brutal--translate': focused }"
-          class="mt-6 brutal-translate py-2 px-4 rounded-lg transition border-black border-3 border-dashed bg-white/90"
+          :class="{ 'border-solid brutal brutal--translate bg-white!': focused }"
+          class="mt-6 brutal-translate py-2 px-4 rounded-lg transition border-black border-3 border-dashed bg-white/85"
         >
           <label for="notes">
 
@@ -134,3 +134,16 @@ const today = computed(() => new Date().toLocaleDateString('en-US', { weekday: '
     </div>
   </m-modal>
 </template>
+
+<style lang="scss" scoped>
+/* we will explain what these classes do next! */
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+</style>

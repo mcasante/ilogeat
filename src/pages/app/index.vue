@@ -10,6 +10,8 @@ defineOptions({ name: 'appIndex' })
 interface FormatedMeal extends Meal { time: string }
 type MealItems = FormatedMeal | { add: true }
 
+// const getToday = (): string => new Date().toISOString().split('T')[0]
+
 const getTime = (timestamp: number): string => new Date(timestamp).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' })
 const mapMeal = (meal: Meal): FormatedMeal => ({
   ...meal,
@@ -51,6 +53,9 @@ const CarouselControls = () => h('div',
     }, () => h('div', { class: 'i-carbon-caret-right' })),
   ])
 
+// random css transform tilt
+const randomTilt = () => `rotate(${Math.random() * 10 - 5}deg)`
+
 const updateCarousel = (item: FormatedMeal) => {
   if (!mealItems.value.includes(item) || item === mealItems.value[currentIndex.value])
     return
@@ -59,20 +64,20 @@ const updateCarousel = (item: FormatedMeal) => {
 </script>
 
 <template>
-  <section v-if="meals?.length" class="flex flex-col bg-pink-300 h-full md:max-w-192 md:mx-auto md:shadow-lg shadow-black/25 md:rounded-md">
+  <section v-if="meals?.length" class="flex flex-col bg-pink-300 h-full">
     <MCarousel
       v-model:active.sync="currentIndex"
       :style="{ backgroundImage: `url(${gridSvg})`, backgroundSize: '50px 50px' }"
       class="bg-repeat bg-repeat bg-pink-300" :max-width="250" :items="mealItems"
     >
-      <template #default="{ item }">
+      <template #default="{ item, isSwiping }">
         <CaptureImageButton v-if="item.add" @capture="handleFile" />
-        <div v-else class="border-3 brutal rounded-2 h-100% overflow-hidden border-black" @click="updateCarousel(item)">
-          <img :src="item.photo" class="block rounded image-render-pixel">
+        <div v-else :style="{ transform: isSwiping ? 'none' : randomTilt() }" class="transition-250 border-3 p-2 bg-white rounded-lg h-100% overflow-hidden border-black" @click="updateCarousel(item)">
+          <img :src="item.photo" class="block rounded-lg image-render-pixel">
         </div>
       </template>
     </MCarousel>
-    <div class="info rounded-t-7 flex-grow bg-yellow-200/80 border-4 border-black px-4 py-4">
+    <div class="info rounded-t-7 flex-grow w-full max-w-192 mx-auto bg-amber-300 border-4 border-black px-4 py-4">
       <MealData :meal="currentMeal" @remove-tag="handleRemove">
         <template #controls>
           <CarouselControls class="mt-2" />
@@ -81,19 +86,6 @@ const updateCarousel = (item: FormatedMeal) => {
     </div>
   </section>
 </template>
-
-<style lang="scss" scoped>
-/* we will explain what these classes do next! */
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
-}
-</style>
 
 <route lang="yaml">
 meta:

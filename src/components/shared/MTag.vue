@@ -40,8 +40,8 @@ const handleClick = () => {
 
 const styles = {
   common: {
-    base: 'text-center transition-250 min-w-max px-3 py-1 text-4 bg-cyan-600 text-white',
-    selected: 'bg-red-300',
+    base: 'text-center inline-flex justify-center lh-6 items-center transition-250 min-w-max px-3 py-1 text-white',
+    selected: 'bg-white text-red!',
   },
   default: {
     base: 'border border-black/50 rounded-1.5 shadow shadow-black/25',
@@ -49,7 +49,7 @@ const styles = {
   },
   neubrutalist: {
     base: 'border-3 bg-pink-500 border-black rounded-1.5',
-    selected: '',
+    selected: 'brutal brutal--translate',
   },
 }
 
@@ -67,19 +67,19 @@ const classes = computed(() => {
 </script>
 
 <template>
-  <div class="inline-block">
-    <div
-      ref="tag"
-      :style="{ width: `${maxWidth}px` }"
-      :class="{
-        [classes.selected]: selected,
-        [classes.base]: true,
-        'cursor-pointer': props.removable,
-      }"
-      @click="handleClick"
-    >
-      <slot v-if="!(selected)" />
-      <span v-if="selected" v-text="'x'" />
-    </div>
+  <div
+    ref="tag"
+    :style="{ width: `${maxWidth}px` }"
+    :class="{
+      [classes.selected]: selected,
+      [classes.base]: true,
+      'cursor-pointer': props.removable,
+    }"
+    @click="handleClick"
+  >
+    <span v-if="!(selected)">
+      <slot />
+    </span>
+    <span v-if="selected" class="text-4 inline-block i-carbon-close-filled" />
   </div>
 </template>

@@ -1,5 +1,5 @@
 import mealsJson from './meals.json'
-
+import mockDiary from './mock-diary.json'
 export interface Meal {
   id: number
   timestamp: number
@@ -17,3 +17,12 @@ export function remoteLoadMeals(): Promise<Meal[]> {
     }, 1000)
   })
 }
+
+// export function remoteLoadDiaryEntries(): Promise<Date[]> {
+//   return new Promise((resolve) => {
+//     setTimeout(() => {
+//       const meals: Meal[] = mockDiary
+//       resolve(meals)
+//     }, 1000)
+//   })
+// }

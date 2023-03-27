@@ -103,8 +103,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'safari-pinned-tab.svg'],
       manifest: {
-        name: 'iLogEat',
-        short_name: 'iLogEat',
+        name: 'myEatingJournal',
+        short_name: 'myEatingJournal',
         theme_color: '#ffffff',
         icons: [
           {

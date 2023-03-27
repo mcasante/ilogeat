@@ -18,7 +18,7 @@ const canvasAnchor = ref<HTMLElement>()
         Love Your Food,<br> Love Your Body
       </h1>
       <h2 class="text-4 md:text-5.5 lh-[1.5] font-sans mt-10">
-        <span class="text-[var(--green)]">iLogEat</span> Helps You Build a Healthier Relationship<br> with Food and Reach Your Wellness Goals
+        <span class="text-[var(--green)]">myEatingJournal</span> Helps You Build a Healthier Relationship<br> with Food and Reach Your Wellness Goals
       </h2>
       <a class="mt-10 block">
         <m-button class="text-6">Get started</m-button>

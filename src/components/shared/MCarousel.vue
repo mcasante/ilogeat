@@ -70,7 +70,7 @@ const getSlideStyle = (index: number) => {
           ...getSlideStyle(index),
         }"
       >
-        <slot :item="item" :index="index" @click="emit('click', item)" />
+        <slot :item="item" :index="index" :is-swiping="isSwiping" @click="emit('click', item)" />
       </div>
     </div>
   </div>

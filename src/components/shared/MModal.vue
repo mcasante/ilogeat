@@ -29,11 +29,11 @@ watchEffect(() => {
 <template>
   <teleport to="body">
     <Transition>
-      <div v-if="visible" class="modal backdrop-blur" @click="handleOverleyClick">
-        <div v-bind="$attrs" class="w-full max-w-200 bg-white rounded brutal py-4 px-4 relative mx-2">
-          <button v-show="closable" class="absolute transition rounded top-0 right-0 p-2 hover:bg-#2221 m-1" @click="emit('update:visible', false)">
+      <div v-if="visible" class="modal backdrop-blur transition-filter-300 bg-white/25" @click="handleOverleyClick">
+        <div v-bind="$attrs" class="w-full max-w-192 bg-white rounded-7 brutal p-4 relative mx-2">
+          <button v-show="closable" class="hover:bg-red hover:text-white absolute transition text-5 rounded-7 border-3 border-black text-red top-0 right-0 p-1 hover:bg-#2221 m-1" @click="emit('update:visible', false)">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
           <slot />
@@ -56,6 +56,14 @@ watchEffect(() => {
 }
 
 .modal {
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  -webkit-transform: translate3d(0,0,0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000;
+  transform: translate3d(0,0,0);
+  transform: translateZ(0);
   position: fixed;
   top: 0;
   left: 0;

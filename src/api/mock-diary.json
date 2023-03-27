@@ -1,0 +1,303 @@
+{
+  "2023-03-01": {
+    "meals": [
+      {
+        "id": 1,
+        "timestamp": 1646066400000,
+        "photo": "https://via.placeholder.com/400",
+        "name": "Greek yogurt with honey",
+        "notes": "Use plain, non-fat yogurt",
+        "tags": [
+          "breakfast",
+          "healthy"
+        ]
+      },
+      {
+        "id": 2,
+        "timestamp": 1646098800000,
+        "photo": "https://via.placeholder.com/400",
+        "name": "Avocado toast",
+        "notes": "Top with cherry tomatoes",
+        "tags": [
+          "breakfast",
+          "vegetarian"
+        ]
+      },
+      {
+        "id": 3,
+        "timestamp": 1646116800000,
+        "photo": "https://via.placeholder.com/400",
+        "name": "Chicken stir-fry",
+        "notes": "Use brown rice",
+        "tags": [
+          "lunch",
+          "healthy",
+          "chicken"
+        ]
+      },
+      {
+        "id": 4,
+        "timestamp": 1646152800000,
+        "photo": "https://via.placeholder.com/400",
+        "name": "Vegetable soup",
+        "notes": "Add lentils for protein",
+        "tags": [
+          "lunch",
+          "vegetarian"
+        ]
+      },
+      {
+        "id": 5,
+        "timestamp": 1646203200000,
+        "photo": "https://via.placeholder.com/400",
+        "name": "Salmon with roasted vegetables",
+        "notes": "Season with dill",
+        "tags": [
+          "dinner",
+          "healthy",
+          "fish"
+        ]
+      },
+      {
+        "id": 6,
+        "timestamp": 1646239200000,
+        "photo": "https://via.placeholder.com/400",
+        "name": "Spaghetti carbonara",
+        "notes": "Use whole wheat pasta",
+        "tags": [
+          "dinner",
+          "pasta"
+        ]
+      },
+      {
+        "id": 7,
+        "timestamp": 1646257200000,
+        "photo": "https://via.placeholder.com/400",
+        "name": "Berry smoothie",
+        "notes": "Use almond milk",
+        "tags": [
+          "snack",
+          "healthy",
+          "smoothie"
+        ]
+      }
+    ]
+  },
+  "2023-03-02": {
+    "meals": [
+      {
+        "id": 1,
+        "timestamp": 1646152800000,
+        "photo": "https://via.placeholder.com/400",
+        "name": "Vegetable soup",
+        "notes": "Add lentils for protein",
+        "tags": [
+          "lunch",
+          "vegetarian"
+        ]
+      },
+      {
+        "id": 2,
+        "timestamp": 1646181600000,
+        "photo": "https://via.placeholder.com/400",
+        "name": "Quinoa salad",
+        "notes": "Add feta cheese and olives",
+        "tags": [
+          "lunch",
+          "vegetarian",
+          "gluten-free"
+        ]
+      },
+      {
+        "id": 3,
+        "timestamp": 1646199600000,
+        "photo": "https://via.placeholder.com/400",
+        "name": "Tuna melt",
+        "notes": "Use whole wheat",
+        "tags": [
+          "lunch",
+          "healthy",
+          "fish"
+        ]
+      },
+      {
+        "id": 4,
+        "timestamp": 1646239200000,
+        "photo": "https://via.placeholder.com/400",
+        "name": "Spaghetti carbonara",
+        "notes": "Use whole wheat pasta",
+        "tags": [
+          "dinner",
+          "pasta"
+        ]
+      },
+      {
+        "id": 5,
+        "timestamp": 1646257200000,
+        "photo": "https://via.placeholder.com/400",
+        "name": "Berry smoothie",
+        "notes": "Use almond milk",
+        "tags": [
+          "snack",
+          "healthy",
+          "smoothie"
+        ]
+      }
+    ]
+  },
+  "2023-03-03": {
+    "meals": [
+      {
+        "id": 1,
+        "timestamp": 1646239200000,
+        "photo": "https://via.placeholder.com/400",
+        "name": "Spaghetti carbonara",
+        "notes": "Use whole wheat pasta",
+        "tags": [
+          "dinner",
+          "pasta"
+        ]
+      },
+      {
+        "id": 2,
+        "timestamp": 1646257200000,
+        "photo": "https://via.placeholder.com/400",
+        "name": "Berry smoothie",
+        "notes": "Use almond milk",
+        "tags": [
+          "snack",
+          "healthy",
+          "smoothie"
+        ]
+      },
+      {
+        "id": 3,
+        "timestamp": 1646275200000,
+        "photo": "https://via.placeholder.com/400",
+        "name": "Chicken salad",
+        "notes": "Add walnuts",
+        "tags": [
+          "dinner",
+          "healthy",
+          "chicken"
+        ]
+      },
+      {
+        "id": 4,
+        "timestamp": 1646314400000,
+        "photo": "https://via.placeholder.com/400",
+        "name": "Peanut butter and jelly",
+        "notes": "Use whole wheat bread",
+        "tags": [
+          "breakfast",
+          "healthy"
+        ]
+      },
+      {
+        "id": 5,
+        "timestamp": 1646332400000,
+        "photo": "https://via.placeholder.com/400",
+        "name": "Egg sandwich",
+        "notes": "Use whole wheat bread",
+        "tags": [
+          "breakfast",
+          "healthy"
+        ]
+      },
+      {
+        "id": 6,
+        "timestamp": 1646350400000,
+        "photo": "https://via.placeholder.com/400",
+        "name": "Oatmeal with berries",
+        "notes": "Use almond milk",
+        "tags": [
+          "breakfast",
+          "healthy"
+        ]
+      }
+    ]
+  },
+  "2023-03-04": {
+    "meals": [
+      {
+        "id": 1,
+        "timestamp": 1646314400000,
+        "photo": "https://via.placeholder.com/400",
+        "name": "Peanut butter and jelly",
+        "notes": "Use whole wheat bread",
+        "tags": [
+          "breakfast",
+          "healthy"
+        ]
+      },
+      {
+        "id": 2,
+        "timestamp": 1646332400000,
+        "photo": "https://via.placeholder.com/400",
+        "name": "Egg sandwich",
+        "notes": "Use whole wheat bread",
+        "tags": [
+          "breakfast",
+          "healthy"
+        ]
+      },
+      {
+        "id": 3,
+        "timestamp": 1646350400000,
+        "photo": "https://via.placeholder.com/400",
+        "name": "Oatmeal with berries",
+        "notes": "Use almond milk",
+        "tags": [
+          "breakfast",
+          "healthy"
+        ]
+      },
+      {
+        "id": 4,
+        "timestamp": 1646386400000,
+        "photo": "https://via.placeholder.com/400",
+        "name": "Avocado toast",
+        "notes": "Top with cherry tomatoes",
+        "tags": [
+          "breakfast",
+          "vegetarian"
+        ]
+      },
+      {
+        "id": 5,
+        "timestamp": 1646404400000,
+        "photo": "https://via.placeholder.com/400",
+        "name": "Chicken stir-fry",
+        "notes": "Use brown rice",
+        "tags": [
+          "lunch",
+          "healthy",
+          "chicken"
+        ]
+      },
+      {
+        "id": 6,
+        "timestamp": 1646422400000,
+        "photo": "https://via.placeholder.com/400",
+        "name": "Vegetable soup",
+        "notes": "Add lentils for protein",
+        "tags": [
+          "lunch",
+          "vegetarian"
+        ]
+      },
+      {
+        "id": 7,
+        "timestamp": 1646461600000,
+        "photo": "https://via.placeholder.com/400",
+        "name": "Salmon with roasted vegetables",
+        "notes": "Season with dill",
+        "tags": [
+          "dinner",
+          "healthy",
+          "fish"
+        ]
+      }
+    ]
+  }
+}

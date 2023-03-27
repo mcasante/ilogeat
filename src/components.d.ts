@@ -8,9 +8,11 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AppBanner: typeof import('./components/AppBanner/index.vue')['default']
+    Camera: typeof import('./components/Camera.vue')['default']
     CaptureImageButton: typeof import('./components/CaptureImageButton.vue')['default']
     Components: typeof import('./components/index.vue')['default']
     EditTags: typeof import('./components/EditTags.vue')['default']
+    ImageResizer: typeof import('./components/ImageResizer.vue')['default']
     MButton: typeof import('./components/shared/MButton.vue')['default']
     MCarousel: typeof import('./components/shared/MCarousel.vue')['default']
     MealData: typeof import('./components/MealData.vue')['default']
