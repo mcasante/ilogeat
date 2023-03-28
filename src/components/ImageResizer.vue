@@ -8,7 +8,7 @@ const props = defineProps<{
 }>()
 
 const canvas = ref()
-const image = ref(new Image())
+const image = ref()
 const container = ref()
 const thumb = ref()
 const { width, height } = useElementSize(container)
@@ -23,11 +23,17 @@ const moved = useClamp(0, min, 0)
 
 let lastPos = 0
 const dragHandler = (e: any) => {
+  if (!document)
+    return
+
   const { movement: [_, y], dragging } = e
   if (!dragging) {
     spring.apply({ cursor: 'grab' })
+    document.body.classList.add('overflow-hidden')
     return
   }
+
+  document.body.classList.remove('overflow-hidden')
 
   moved.value = lastPos + y
   spring.apply({ y: moved.value, cursor: 'grabbing' })
@@ -39,7 +45,12 @@ useGesture({
   onDrag: dragHandler,
   onDragEnd: () => spring.apply({ y: moved.value, cursor: 'default' }),
 },
-{ domTarget: thumb },
+{
+  domTarget: thumb,
+  drag: {
+    useTouch: true,
+  },
+},
 )
 
 const model = reactive({
@@ -55,7 +66,7 @@ const size = reactive<{ [key: string]: number }>({
 let ctx: CanvasRenderingContext2D
 
 const ar = computed(() => {
-  if (!image.value)
+  if (!image?.value?.src)
     return [0, 0]
   const { width, height } = image.value
   const aspectRatio = width / height
@@ -76,6 +87,10 @@ const map: { [key: number]: any } = {
 }
 
 const drawImage = (scale: number) => {
+  if (!Image)
+    return
+
+  image.value = new Image()
   ctx.save()
   const [full, half] = new Array(2).fill(canvas.value.width).map((n, i) => n / (i + 1))
   const [x, y, w, h] = new Array(2).fill(['x', 'y'])

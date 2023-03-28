@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import photo from '~/assets/sample-plate.jpeg'
 import gridSvg from '~/assets/grid.svg'
 import { remoteLoadMeals } from '~/api/index'
 import type { Meal } from '~/api/index'
@@ -15,7 +14,7 @@ type MealItems = FormatedMeal | { add: true }
 const getTime = (timestamp: number): string => new Date(timestamp).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' })
 const mapMeal = (meal: Meal): FormatedMeal => ({
   ...meal,
-  photo,
+  photo: 'https://picsum.photos/250/250',
   time: getTime(meal.timestamp),
 })
 

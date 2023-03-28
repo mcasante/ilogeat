@@ -127,7 +127,7 @@ const entries = [
         </div>
         <div>
           <h3 class="text-6 text-border-1.5 text-border-[#000] text-white" v-text="entry.weekdate" />
-          <h5 v-text="entry.date" />
+          <h4 v-text="entry.date" />
         </div>
       </div>
     </MButton>

@@ -103,24 +103,17 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'safari-pinned-tab.svg'],
       manifest: {
-        name: 'myEatingJournal',
+        name: 'My Eating Journal',
         short_name: 'myEatingJournal',
-        theme_color: '#ffffff',
+        theme_color: '#ec4899',
+        background_color: '#bef264',
+        display: 'standalone',
+        orientation: 'portrait',
         icons: [
           {
-            src: '/pwa-192x192.png',
-            sizes: '192x192',
-            type: 'image/png',
-          },
-          {
-            src: '/pwa-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-          },
-          {
-            src: '/pwa-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
+            src: '/favicon.svg',
+            sizes: 'any',
+            type: 'image/svg+xml',
             purpose: 'any maskable',
           },
         ],

@@ -18,11 +18,13 @@ const handleOverleyClick = (e: MouseEvent) => {
     emit('update:visible', false)
 }
 
-watchEffect(() => {
-  if (props.visible)
-    document.body.classList.add('overflow-hidden')
-  else
-    document.body.classList.remove('overflow-hidden')
+onMounted(() => {
+  watchEffect(() => {
+    if (props.visible)
+      document.body.classList.add('overflow-hidden')
+    else
+      document.body.classList.remove('overflow-hidden')
+  })
 })
 </script>
 

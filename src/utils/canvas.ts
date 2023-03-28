@@ -22,6 +22,8 @@ export class ContextHelper {
 
 export const createImage = (image: string): Promise<HTMLImageElement> => {
   return new Promise((resolve) => {
+    if (!Image)
+      return
     const img = new Image()
     img.src = image
     if (img.complete)
