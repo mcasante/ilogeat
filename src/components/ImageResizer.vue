@@ -1,25 +1,55 @@
 <script lang="ts" setup>
+import { useGesture } from '@vueuse/gesture'
+import { useMotion } from '@vueuse/motion'
+import { useClamp } from '@vueuse/math'
+
 const props = defineProps<{
   imageSrc: string
 }>()
 
-const scale = ref(1)
-const sliderValue = ref(1)
 const canvas = ref()
 const image = ref(new Image())
 const container = ref()
-const { width } = useElementSize(container)
+const thumb = ref()
+const { width, height } = useElementSize(container)
 
-const size = reactive({
-  x: 0,
-  y: 0,
+const spring = useMotion(thumb as any)
+
+const min = computed(() => height.value && thumb.value
+  ? thumb.value.offsetHeight - height.value
+  : 0)
+
+const moved = useClamp(0, min, 0)
+
+let lastPos = 0
+const dragHandler = (e: any) => {
+  const { movement: [_, y], dragging } = e
+  if (!dragging) {
+    spring.apply({ cursor: 'grab' })
+    return
+  }
+
+  moved.value = lastPos + y
+  spring.apply({ y: moved.value, cursor: 'grabbing' })
+}
+
+// Composable usage
+useGesture({
+  onDragStart: () => lastPos = moved.value,
+  onDrag: dragHandler,
+  onDragEnd: () => spring.apply({ y: moved.value, cursor: 'default' }),
+},
+{ domTarget: thumb },
+)
+
+const model = reactive({
+  scale: 1,
+  slider: 1,
 })
 
-watchEffect(() => {
-  if (!(canvas.value && width.value))
-    return
-  canvas.value.width = width.value
-  canvas.value.height = width.value
+const size = reactive<{ [key: string]: number }>({
+  x: 0,
+  y: 0,
 })
 
 let ctx: CanvasRenderingContext2D
@@ -47,16 +77,17 @@ const map: { [key: number]: any } = {
 
 const drawImage = (scale: number) => {
   ctx.save()
-  ctx.translate(canvas.value.width / 2, canvas.value.width / 2)
-  const [x, y, w, h] = [
-    (-size.x * scale / 2),
-    (-size.y * scale / 2),
-    size.x * scale,
-    size.y * scale,
-  ]
+  const [full, half] = new Array(2).fill(canvas.value.width).map((n, i) => n / (i + 1))
+  const [x, y, w, h] = new Array(2).fill(['x', 'y'])
+    .map((entry, i) => (
+      entry
+        .map((n: keyof typeof size) => size[n] * scale)
+        .map((n: number) => i ? n : -n / 2)
+    )).flat()
 
   ctx.fillStyle = 'pink'
-  ctx.fillRect(-canvas.value.width / 2, -canvas.value.width / 2, canvas.value.width, canvas.value.height)
+  ctx.translate(half, half)
+  ctx.fillRect(-half, -half, full, full)
 
   ctx.drawImage(
     image.value,
@@ -68,44 +99,60 @@ const drawImage = (scale: number) => {
   ctx.restore()
 }
 
-const updateScale = (sliderValue: number) => {
+const updateScale = (value: number) => {
   const minScale = 1
   const maxScale = 2
-  const sliderRange = 100
-  const sliderPercentage = sliderValue / sliderRange
+  const sliderPercentage = value / height.value
   const scaleRange = maxScale - minScale
   const newScale = minScale + sliderPercentage * scaleRange
-  scale.value = newScale
-  drawImage(scale.value)
+  model.scale = newScale
+  drawImage(model.scale)
 }
 
-watch(sliderValue, (value) => {
-  updateScale(value)
+watch(moved, (value: number) => updateScale(-value))
+
+watchEffect(async () => {
+  if (!canvas.value)
+    return
+  canvas.value.width = width.value
+  canvas.value.height = width.value
+  await setup()
+  drawImage(model.scale)
 })
 
 watchEffect(() => {
-  if (!(props.imageSrc && canvas.value))
-    return
+  if (ctx)
+    updateScale(model.slider)
+})
 
+function setup(): Promise<void> {
   ctx = canvas.value.getContext('2d')
   image.value.src = props.imageSrc
-  image.value.onload = () => {
-    const max = Math.max(...ar.value)
+  return new Promise((resolve) => {
+    image.value.addEventListener('load', () => {
+      const max = Math.max(...ar.value)
 
-    const greater: keyof typeof map = ar.value.findIndex(v => v === max)
-    map[greater](max)
-    drawImage(1)
-  }
-})
+      const greater: keyof typeof map = ar.value.findIndex(v => v === max)
+      map[greater](max)
+      resolve()
+    })
+  })
+}
 </script>
 
 <template>
   <div ref="container" class="pinch-zoom-canvas">
-    <div class="pinch-zoom-canvas__canvas-wrapper">
-      <canvas ref="canvas" class="w-full" />
-    </div>
-    <div class="pinch-zoom-canvas__slider-wrapper">
-      <input v-model.number="sliderValue" type="range" min="1" max="100" step="1">
+    <div class="max-w-120 max-h-120 flex items-stretch  gap-4">
+      <div class="slider w-4 flex items-end bg-gray-400">
+        <div
+          ref="thumb"
+          v-motion="'thumb'"
+          class="slider__thumb bg-gray-600 rounded-full w-8 h-8"
+        />
+      </div>
+      <div>
+        <canvas ref="canvas" class="w-full" />
+      </div>
     </div>
   </div>
 </template>
@@ -119,20 +166,6 @@ watchEffect(() => {
   height: 100%;
   width: 100%;
   overflow: hidden;
-}
-
-.pinch-zoom-canvas__canvas-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.pinch-zoom-canvas__slider-wrapper {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
-  width: 50px;
 }
 
 input[type="range"] {
