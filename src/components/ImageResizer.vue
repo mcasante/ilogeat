@@ -13,7 +13,7 @@ const container = ref()
 const slider = ref()
 const thumb = ref()
 const { width } = useElementSize(container)
-const { height } = useElementSize(slider)
+const { width: sliderWidth } = useElementSize(slider)
 
 const spring = useMotion(thumb as any)
 
@@ -24,18 +24,22 @@ const transition = {
   mass: 0.4,
 }
 
-const min = computed(() => height.value && thumb.value
-  ? thumb.value.offsetHeight - height.value
+// const min = computed(() => sliderWidth.value && thumb.value
+//   ? thumb.value.offsetWidth - sliderWidth.value
+//   : 0)
+
+const max = computed(() => sliderWidth.value && thumb.value
+  ? sliderWidth.value - thumb.value.offsetWidth
   : 0)
 
-const moved = useClamp(0, min, 0)
+const moved = useClamp(0, 0, max)
 
 let lastPos = 0
 const dragHandler = (e: any) => {
   if (!document)
     return
 
-  const { movement: [_, y], dragging } = e
+  const { movement: [x], dragging } = e
   if (!dragging) {
     // spring.apply({ cursor: 'grab' })
     document.body.classList.add('overflow-hidden')
@@ -44,15 +48,15 @@ const dragHandler = (e: any) => {
 
   document.body.classList.remove('overflow-hidden')
 
-  moved.value = lastPos + y
-  spring.apply({ y: moved.value, cursor: 'grabbing', transition })
+  moved.value = lastPos + x
+  spring.apply({ x: moved.value, cursor: 'grabbing', transition })
 }
 
 // Composable usage
 useGesture({
   onDragStart: () => lastPos = moved.value,
   onDrag: dragHandler,
-  onDragEnd: () => spring.apply({ y: moved.value, cursor: 'default', transition }),
+  onDragEnd: () => spring.apply({ x: moved.value, cursor: 'default', transition }),
 },
 {
   domTarget: thumb,
@@ -122,14 +126,14 @@ const drawImage = (scale: number) => {
 const updateScale = (value: number) => {
   const minScale = 1
   const maxScale = 2
-  const sliderPercentage = value / height.value
+  const sliderPercentage = value / sliderWidth.value
   const scaleRange = maxScale - minScale
   const newScale = minScale + sliderPercentage * scaleRange
   model.scale = newScale
   drawImage(model.scale)
 }
 
-watch(moved, (value: number) => updateScale(-value))
+watch(moved, (value: number) => updateScale(value))
 
 watchEffect(async () => {
   if (!canvas.value)
@@ -166,15 +170,15 @@ function setup(): Promise<void> {
 
 <template>
   <div ref="container" class="pinch-zoom-canvas bg-amber-300">
-    <div class="max-w-120 max-h-120 flex items-stretch gap-4">
+    <div class="max-w-90 flex flex-col items-stretch gap-4">
       <div class="rounded-lg p-2 bg-white brutal">
         <canvas ref="canvas" class="b-1 b-black rounded-lg w-full" />
       </div>
-      <div ref="slider" class="slider bg-black w-4 flex b-4 b-black rounded items-end">
+      <div ref="slider" class="slider bg-black w-full h-4 flex b-4 b-black rounded items-end">
         <div
           ref="thumb"
           v-motion="'thumb'"
-          class="slider__thumb cursor-grab brutal left--3.4 relative min-w-8 bg-amber-500 rounded w-8 h-8"
+          class="slider__thumb cursor-grab brutal top-2.5 relative bg-amber-500 rounded w-8 h-8"
         />
       </div>
     </div>
