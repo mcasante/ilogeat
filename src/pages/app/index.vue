@@ -6,10 +6,11 @@ import MButton from '~/components/shared/MButton.vue'
 
 defineOptions({ name: 'appIndex' })
 
+const router = useRouter()
+const picture = usePictureStore()
+
 interface FormatedMeal extends Meal { time: string }
 type MealItems = FormatedMeal | { add: true }
-
-// const getToday = (): string => new Date().toISOString().split('T')[0]
 
 const getTime = (timestamp: number): string => new Date(timestamp).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' })
 const mapMeal = (meal: Meal): FormatedMeal => ({
@@ -33,8 +34,8 @@ const handleRemove = (mealId: Meal['id'], tag: string): void => {
 }
 
 const handleFile = (buffer: string | ArrayBuffer | null) => {
-  console.log(buffer)
-  // TODO: handle file
+  picture.setData(buffer)
+  router.push('/app/meal/')
 }
 
 const CarouselControls = () => h('div',

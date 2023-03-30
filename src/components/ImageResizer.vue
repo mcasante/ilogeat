@@ -4,16 +4,25 @@ import { useMotion } from '@vueuse/motion'
 import { useClamp } from '@vueuse/math'
 
 const props = defineProps<{
-  imageSrc: string
+  imageSrc: string | ArrayBuffer | null
 }>()
 
 const canvas = ref()
 const image = ref()
 const container = ref()
+const slider = ref()
 const thumb = ref()
-const { width, height } = useElementSize(container)
+const { width } = useElementSize(container)
+const { height } = useElementSize(slider)
 
 const spring = useMotion(thumb as any)
+
+const transition = {
+  type: 'spring',
+  stiffness: 100,
+  damping: 10,
+  mass: 0.4,
+}
 
 const min = computed(() => height.value && thumb.value
   ? thumb.value.offsetHeight - height.value
@@ -28,7 +37,7 @@ const dragHandler = (e: any) => {
 
   const { movement: [_, y], dragging } = e
   if (!dragging) {
-    spring.apply({ cursor: 'grab' })
+    // spring.apply({ cursor: 'grab' })
     document.body.classList.add('overflow-hidden')
     return
   }
@@ -36,14 +45,14 @@ const dragHandler = (e: any) => {
   document.body.classList.remove('overflow-hidden')
 
   moved.value = lastPos + y
-  spring.apply({ y: moved.value, cursor: 'grabbing' })
+  spring.apply({ y: moved.value, cursor: 'grabbing', transition })
 }
 
 // Composable usage
 useGesture({
   onDragStart: () => lastPos = moved.value,
   onDrag: dragHandler,
-  onDragEnd: () => spring.apply({ y: moved.value, cursor: 'default' }),
+  onDragEnd: () => spring.apply({ y: moved.value, cursor: 'default', transition }),
 },
 {
   domTarget: thumb,
@@ -87,10 +96,6 @@ const map: { [key: number]: any } = {
 }
 
 const drawImage = (scale: number) => {
-  if (!Image)
-    return
-
-  image.value = new Image()
   ctx.save()
   const [full, half] = new Array(2).fill(canvas.value.width).map((n, i) => n / (i + 1))
   const [x, y, w, h] = new Array(2).fill(['x', 'y'])
@@ -100,7 +105,7 @@ const drawImage = (scale: number) => {
         .map((n: number) => i ? n : -n / 2)
     )).flat()
 
-  ctx.fillStyle = 'pink'
+  ctx.fillStyle = '#f9a8d4'
   ctx.translate(half, half)
   ctx.fillRect(-half, -half, full, full)
 
@@ -142,8 +147,12 @@ watchEffect(() => {
 
 function setup(): Promise<void> {
   ctx = canvas.value.getContext('2d')
-  image.value.src = props.imageSrc
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
+    if (!Image)
+      reject(new Error('Image is not defined'))
+
+    image.value = new Image()
+    image.value.src = props.imageSrc
     image.value.addEventListener('load', () => {
       const max = Math.max(...ar.value)
 
@@ -156,17 +165,17 @@ function setup(): Promise<void> {
 </script>
 
 <template>
-  <div ref="container" class="pinch-zoom-canvas">
-    <div class="max-w-120 max-h-120 flex items-stretch  gap-4">
-      <div class="slider w-4 flex items-end bg-gray-400">
+  <div ref="container" class="pinch-zoom-canvas bg-amber-300">
+    <div class="max-w-120 max-h-120 flex items-stretch gap-4">
+      <div class="rounded-lg p-2 bg-white brutal">
+        <canvas ref="canvas" class="b-1 b-black rounded-lg w-full" />
+      </div>
+      <div ref="slider" class="slider bg-black w-4 flex b-4 b-black rounded items-end">
         <div
           ref="thumb"
           v-motion="'thumb'"
-          class="slider__thumb bg-gray-600 rounded-full w-8 h-8"
+          class="slider__thumb cursor-grab brutal left--3.4 relative min-w-8 bg-amber-500 rounded w-8 h-8"
         />
-      </div>
-      <div>
-        <canvas ref="canvas" class="w-full" />
       </div>
     </div>
   </div>
@@ -178,42 +187,6 @@ function setup(): Promise<void> {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
   width: 100%;
-  overflow: hidden;
-}
-
-input[type="range"] {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  height: 10px;
-  border-radius: 5px;
-  background-color: #ddd;
-  outline: none;
-  opacity: 0.7;
-  transition: opacity 0.2s;
-}
-
-input[type="range"]:hover {
-  opacity: 1;
-}
-
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: #007aff;
-  cursor: pointer;
-}
-
-input[type="range"]::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: #007aff;
-  cursor: pointer;
 }
 </style>
