@@ -6,6 +6,11 @@ import { useClamp } from '@vueuse/math'
 const props = defineProps<{
   imageSrc: string | ArrayBuffer | null
 }>()
+const emit = defineEmits<{
+  (e: 'update:imageSrc', imageSrc: string | ArrayBuffer | null): void
+}>()
+
+const activeColor = ref('#f9a8d4')
 
 const canvas = ref()
 const image = ref()
@@ -109,7 +114,7 @@ const drawImage = (scale: number) => {
         .map((n: number) => i ? n : -n / 2)
     )).flat()
 
-  ctx.fillStyle = '#f9a8d4'
+  ctx.fillStyle = activeColor.value
   ctx.translate(half, half)
   ctx.fillRect(-half, -half, full, full)
 
@@ -149,6 +154,11 @@ watchEffect(() => {
     updateScale(model.slider)
 })
 
+watch(activeColor, () => {
+  if (ctx)
+    drawImage(model.scale)
+})
+
 function setup(): Promise<void> {
   ctx = canvas.value.getContext('2d')
   return new Promise((resolve, reject) => {
@@ -166,12 +176,38 @@ function setup(): Promise<void> {
     })
   })
 }
+
+const colors = [
+  '#f9a8d4',
+  'rgba(190,242,100,1)',
+  'rgba(252,211,77,1)',
+  '#FFF',
+  '#000',
+]
+const updateColor = (color: string) => {
+  activeColor.value = color
+}
 </script>
 
 <template>
   <div ref="container" class="pinch-zoom-canvas bg-amber-300">
+    <div class="flex flex-col gap-3 mr-4 h-full justify-between">
+      <m-button
+        v-for="color in colors"
+        :key="color"
+        class="w-8 h-8 rounded brutal transition!"
+        :class="{ 'brutal-translate! shadow-none!': activeColor === color }"
+        :style="{ backgroundColor: color }"
+        @click="() => updateColor(color)"
+      />
+    </div>
     <div class="max-w-90 flex flex-col items-stretch gap-4">
-      <div class="rounded-lg p-2 bg-white brutal">
+      <div class="relative rounded-lg p-2 mt-4 bg-white brutal">
+        <MButton class="bg-red-500! absolute! w-10 h-10 text-white rounded-full font-bold z-99 right--5 top--5 p-1!" @click="emit('update:imageSrc', null)">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </MButton>
         <canvas ref="canvas" class="b-1 b-black rounded-lg w-full" />
       </div>
       <div ref="slider" class="slider bg-black w-full h-4 flex b-4 b-black rounded items-end">

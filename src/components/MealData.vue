@@ -78,7 +78,7 @@ const today = computed(() => new Date().toLocaleDateString('en-US', { weekday: '
       <slot name="controls" />
     </div>
 
-    <Transition>
+    <m-transition-expand>
       <div v-if="meal">
         <div class="flex flex-wrap gap-2 mt-2">
           <MTag
@@ -98,7 +98,6 @@ const today = computed(() => new Date().toLocaleDateString('en-US', { weekday: '
           class="mt-6 brutal-translate py-2 px-4 rounded-lg transition border-black border-3 border-dashed bg-white/85"
         >
           <label for="notes">
-
             <h4 class="text-6 mb-2">
               Notes
             </h4>
@@ -106,7 +105,7 @@ const today = computed(() => new Date().toLocaleDateString('en-US', { weekday: '
           <textarea id="notes" ref="textarea" v-model="notes" name="notes" rows="5" class="bg-transparent outline-none w-full h-full resize-none" />
         </div>
       </div>
-    </Transition>
+    </m-transition-expand>
   </div>
   <m-modal v-if="meal" v-model:visible="addTagModal.visible">
     <h1 class="text-2xl font-bold mb-4">

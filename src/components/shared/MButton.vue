@@ -12,11 +12,11 @@ const classes = [defaults, hover, active].join(' ')
 
 <template>
   <button v-if="!link" v-bind="$attrs" :class="classes">
-    <slot>Click!</slot>
+    <slot />
   </button>
   <router-link v-else :to="link">
     <button v-bind="$attrs" :class="classes">
-      <slot>Click!</slot>
+      <slot />
     </button>
   </router-link>
 </template>
