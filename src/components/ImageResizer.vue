@@ -195,8 +195,10 @@ const updateColor = (color: string) => {
       <m-button
         v-for="color in colors"
         :key="color"
-        class="w-8 h-8 rounded brutal transition!"
-        :class="{ 'brutal-translate! shadow-none!': activeColor === color }"
+        class="w-8 h-8 rounded brutal"
+        :class="{
+          'brutal-translate! shadow-none!': activeColor === color,
+        }"
         :style="{ backgroundColor: color }"
         @click="() => updateColor(color)"
       />

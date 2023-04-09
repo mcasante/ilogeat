@@ -31,7 +31,7 @@ const valueCopy = ref('')
     <input
       :id="name" ref="input" v-model="valueCopy" :type="type"
       :placeholder="placeholder"
-      class="bg-transparent placeholder-lime-700/25 text-5 font-bold outline-none w-full h-full"
+      class="bg-transparent placeholder-black/20 text-5 font-bold outline-none w-full h-full"
     >
   </div>
 </template>

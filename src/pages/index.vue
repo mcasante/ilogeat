@@ -13,6 +13,9 @@ const canvasAnchor = ref<HTMLElement>()
 
 <template>
   <div>
+    <worst-link label="Click" href="https://google.com" />
+  </div>
+  <div>
     <section class="select-none py-15 text-center">
       <h1 class="text-14 lh-14 md:text-20 md:lh-20">
         Love Your Food,<br> Love Your Body

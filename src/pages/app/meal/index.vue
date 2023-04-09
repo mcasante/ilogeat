@@ -84,7 +84,7 @@ const formatted = computed(() => {
     <m-input
       v-model:value="modelCopy.name"
       label="Meal name"
-      name="name"
+      name="mealName"
       type="text"
       placeholder="Delicious meal name"
     />
